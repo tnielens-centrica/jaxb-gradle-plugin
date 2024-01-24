@@ -42,6 +42,7 @@ import javax.inject.Inject
  * This task generates a schema file from
  * existing sources.
  */
+@CacheableTask
 abstract class JavaToSchemaTask @Inject constructor(
     objectFactory: ObjectFactory):DefaultTask() {
 
@@ -79,6 +80,7 @@ abstract class JavaToSchemaTask @Inject constructor(
      * @property inputDir
      */
     @get:InputDirectory
+    @get:PathSensitive(PathSensitivity.RELATIVE)
     var inputDir: File
         get() = inputDirProperty.get().asFile
         set(value) = inputDirProperty.set(value)
