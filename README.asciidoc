@@ -3,6 +3,9 @@
 :toc:
 :icons: font
 
+== Fork Note
+This is a fork of https://github.com/IntershopCommunicationsAG/jaxb-gradle-plugin . It's used to publish early releases of https://github.com/IntershopCommunicationsAG/jaxb-gradle-plugin/issues/70 and https://github.com/IntershopCommunicationsAG/jaxb-gradle-plugin/issues/71 to support gradle caching.
+
 [CAUTION]
 ====
 The default configuration was adapted for **Jakarta XML Binding 3.0.1**.
