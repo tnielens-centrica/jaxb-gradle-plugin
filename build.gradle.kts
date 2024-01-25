@@ -231,12 +231,14 @@ publishing {
     }
     repositories {
         maven {
-            val releasesRepoUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2"
-            val snapshotsRepoUrl = "https://oss.sonatype.org/content/repositories/snapshots"
-            url = uri(if (version.toString().endsWith("SNAPSHOT")) snapshotsRepoUrl else releasesRepoUrl)
+            val isSnapshot = project.version.toString().endsWith("-SNAPSHOT")
+            val subrepo = if (isSnapshot) "snapshots" else "releases"
+            val nexusRoot = project.property("nexusRoot").toString()
+            url = uri("$nexusRoot/repository/maven-$subrepo")
+
             credentials {
-                username = sonatypeUsername
-                password = sonatypePassword
+                username = project.property("mavenUser").toString()
+                password = project.property("mavenPassword").toString()
             }
         }
     }
