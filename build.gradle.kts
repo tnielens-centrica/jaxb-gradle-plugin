@@ -29,9 +29,6 @@ plugins {
     // ide plugin
     idea
 
-    // artifact signing - necessary on Maven Central
-    signing
-
     // plugin for documentation
     id("org.asciidoctor.jvm.convert") version "3.3.2"
 
@@ -79,7 +76,7 @@ java {
     withJavadocJar()
     withSourcesJar()
     toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
+        languageVersion = JavaLanguageVersion.of(11)
     }
 }
 
@@ -180,16 +177,6 @@ tasks {
         outputDirectory.set(buildDir.resolve("dokka"))
     }
 
-    withType<Sign> {
-        val sign = this
-        withType<PublishToMavenLocal> {
-            this.dependsOn(sign)
-        }
-        withType<PublishToMavenRepository> {
-            this.dependsOn(sign)
-        }
-    }
-
     afterEvaluate {
         getByName<Jar>("javadocJar") {
             dependsOn(dokkaJavadoc)
@@ -253,10 +240,6 @@ publishing {
             }
         }
     }
-}
-
-signing {
-    sign(publishing.publications["intershopMvn"])
 }
 
 dependencies {
